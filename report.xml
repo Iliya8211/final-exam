@@ -1,0 +1,16 @@
+<suite name="exam" verbose="1">
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter"></listener>
+    </listeners>
+    <test name="Download Tests">
+        <classes>
+            <class name="exam.tests.CommentPicture"></class>
+            <class name="exam.tests.DeletePicture"></class>
+            <class name="exam.tests.DownloadTest"></class>
+            <class name="exam.tests.FollowUser"></class>
+            <class name="exam.tests.LikePicWhenNotLogin"></class>
+            <class name="exam.tests.LogOut"></class>
+            <class name="exam.tests.NewPostTest"></class>
+        </classes>
+    </test>
+</suite>
