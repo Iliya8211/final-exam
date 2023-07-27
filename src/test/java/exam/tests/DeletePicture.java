@@ -49,6 +49,6 @@ public class DeletePicture extends BaseTestMethod {
         System.out.println("8. Verify that number of pictures has decrease with one");
         int newNumberOfPic = profilePage.getExistingPostCount();
         System.out.println(newNumberOfPic);
-        Assert.assertEquals(newNumberOfPic, numCurrentPost, "Picture was not delete it");
+        Assert.assertEquals(newNumberOfPic, numCurrentPost -1, "Picture was not delete it");
     }
 }

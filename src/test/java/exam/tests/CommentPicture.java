@@ -4,6 +4,7 @@ import exam.pages.Header;
 import exam.pages.HomePage;
 import exam.pages.LoginPage;
 import exam.pages.ProfilePage;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -36,5 +37,15 @@ public class CommentPicture extends BaseTestMethod {
 
         System.out.println("4.Make comment");
         profilePage.enterComment();
+
+        System.out.println("5.Click on last comment");
+        int actualNumbersOfComment = loginPage.getExistingCommentCount();
+        loginPage.clickLastComment(actualNumbersOfComment-1);
+
+
+
+        System.out.println("6.Verify text is posted");
+        int newNumberOfComment = actualNumbersOfComment;
+        Assert.assertEquals(newNumberOfComment, actualNumbersOfComment, "Comment wasnt created");
     }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.internal.WebElementToJsonConverter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.List;
@@ -34,36 +35,50 @@ public class Header extends BasePage {
     @FindBy(css = ".toast-message")
     WebElement popUpMsg;
 
-     public Header(WebDriver driver) {
+    @FindBy(css = ".fa-sign-out-alt")
+    WebElement LogoutBtn;
+
+    public Header(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-    public void goToLogin(){
+
+    public void goToLogin() {
         clickElement(loginLink);
     }
 
-    public void goToHome(){
+    public void goToHome() {
         clickElement(homeLink);
     }
 
-    public void goToProfile(){
+    public void goToProfile() {
         clickElement(profileLink);
     }
 
-    public void goToNewPost(){
+    public void goToNewPost() {
         clickElement(newPostLink);
     }
 
-    public void clickUserPicture(){
+    public void clickUserPicture() {
         clickElement(userPicture);
     }
 
-    public void pressLikeBtn(){
+    public void pressLikeBtn() {
         clickElement(likeBtn);
     }
 
-    public void getToastMsgText (){
+    public void getToastMsgText() {
+        smallWait.until(ExpectedConditions.visibilityOf(popUpMsg));
         String toastMsg = popUpMsg.getText().trim();
         Assert.assertEquals(toastMsg, "You must login", "Incorrect popUp message");
+    }
+
+    public void clickLogout(){
+        Assert.assertTrue(LogoutBtn.isDisplayed(), "The logout Btn is not displayed");
+        clickElement(LogoutBtn);
+    }
+
+    public void invisibilityOfLogoutBtn(){
+        smallWait.until(ExpectedConditions.invisibilityOf(LogoutBtn));
     }
 }

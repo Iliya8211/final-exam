@@ -29,11 +29,18 @@ public class FollowUser extends BaseTestMethod {
         loginPage.verifyUrl();
         loginPage.login(username, password);
 
+
         System.out.println("3.Press follow Btn");
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.follow();
 
-        System.out.println("4.Verify you followed that user");
+        System.out.println("4.Verify toast Msg for following that user appear");
+        profilePage.toastMsgFollow();
+
+
+        System.out.println("5.Verify you followed that user");
         profilePage.unfollowBtn();
+        profilePage.pressUnfollow();
+
     }
 }

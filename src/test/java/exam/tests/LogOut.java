@@ -24,6 +24,8 @@ public class LogOut extends BaseTestMethod{
         loginPage.verifyUrl();
         loginPage.login(username, password);
         System.out.println("3. Click LogOut");
-        loginPage.clickLogout();
+        header.clickLogout();
+        System.out.println("4.Verify Log out Btn is not visible");
+        header.invisibilityOfLogoutBtn();
     }
 }

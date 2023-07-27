@@ -42,4 +42,5 @@ public class BasePage {
         smallWait.until(ExpectedConditions.visibilityOf(element));
         return element.getText();
     }
+
 }

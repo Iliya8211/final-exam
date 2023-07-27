@@ -1,9 +1,11 @@
 package exam.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.List;
@@ -35,6 +37,13 @@ public class ProfilePage extends BasePage {
 
     @FindBy(xpath = "//button[text () = 'Unfollow']")
     WebElement unfollow;
+
+    @FindBy(tagName = "app-post")
+    WebElement newModalDialog;
+
+    @FindBy(css = ".toast-message")
+    WebElement popUpFollowMsg;
+
     public ProfilePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -49,6 +58,7 @@ public class ProfilePage extends BasePage {
     }
 
     public int getExistingPostCount() {
+        smallWait.until(ExpectedConditions.visibilityOf(newModalDialog));
         return existingPosts.size();
     }
 
@@ -56,9 +66,11 @@ public class ProfilePage extends BasePage {
         clickElement(existingPosts.get(index));
     }
 
-    public void clickDelBtnPic() {
-        deletePostBtn.click();
-    }
+   public void clickDelBtnPic() {
+   clickElement(deletePostBtn);
+   }
+
+
 
     public void confirmPicDeletion() {
         confirmDeletion.click();
@@ -68,8 +80,8 @@ public class ProfilePage extends BasePage {
     }
 
     public void enterComment(){
-        commentField.click();
-        commentField.sendKeys("nice car");
+       enterText(commentField, "Nice pic");
+       commentField.sendKeys(Keys.ENTER);
     }
 
     public void follow (){
@@ -79,6 +91,14 @@ public class ProfilePage extends BasePage {
     public void unfollowBtn(){
         String actualTextUnfollow = unfollow.getText();
         Assert.assertEquals(actualTextUnfollow, "Unfollow", "You didnt follow that user");
+    }
+
+    public void toastMsgFollow (){
+        smallWait.until(ExpectedConditions.visibilityOf(popUpFollowMsg));
+    }
+
+    public void pressUnfollow (){
+        clickElement(unfollow);
     }
 
   }
